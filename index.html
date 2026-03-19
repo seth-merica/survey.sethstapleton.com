@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Translator — B2B Validation Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --mid: #4a4a4a;
+    --light: #8a8a8a;
+    --rule: #e0dcd6;
+    --bg: #faf9f7;
+    --accent: #1a1a2e;
+    --accent-warm: #c8a96e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--accent);
+    padding: 64px 48px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.15);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 1px solid rgba(200,169,110,0.08);
+  }
+  .header-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 20px;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    color: #ffffff;
+    line-height: 1.1;
+    font-weight: 400;
+    max-width: 600px;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+  .header-meta {
+    margin-top: 28px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .header-meta span {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+  }
+  .header-meta .dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* WRAPPER */
+  .wrapper {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* INTRO BLOCK */
+  .intro-block {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-top: none;
+    padding: 40px 48px;
+    position: relative;
+  }
+  .intro-block::before {
+    content: '';
+    position: absolute;
+    left: 48px; top: 0;
+    width: 40px; height: 2px;
+    background: var(--accent-warm);
+  }
+  .intro-block p {
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.75;
+    max-width: 580px;
+  }
+  .intro-block .sign {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--light);
+  }
+  .intro-block .sign strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* RESPONDENT BLOCK */
+  .respondent-block {
+    background: var(--accent);
+    padding: 28px 40px;
+    margin-top: 24px;
+    border: 1px solid rgba(200,169,110,0.2);
+  }
+  .respondent-block .r-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 18px;
+  }
+  .respondent-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .r-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 8px;
+  }
+  .r-field input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid rgba(255,255,255,0.2);
+    padding: 8px 0;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .r-field input::placeholder { color: rgba(255,255,255,0.2); }
+  .r-field input:focus { border-color: var(--accent-warm); }
+
+  /* SECTION DIVIDER */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 40px 0 0;
+  }
+  .section-divider span {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--light);
+    white-space: nowrap;
+  }
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* QUESTION CARD */
+  .q-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    margin-top: 16px;
+    padding: 36px 40px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .q-card:hover { border-color: #c8c2b8; }
+
+  .q-number {
+    position: absolute;
+    top: 36px; right: 40px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: var(--rule);
+    line-height: 1;
+    user-select: none;
+  }
+  .q-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 10px;
+  }
+  .q-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.5;
+    max-width: 520px;
+    margin-bottom: 20px;
+  }
+
+  /* CUSTOM CHECKBOXES */
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    transition: all 0.15s;
+    background: var(--bg);
+    position: relative;
+  }
+  .opt:hover { background: #f0ede8; border-color: #c8c2b8; }
+
+  .opt input[type="checkbox"],
+  .opt input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0; height: 0;
+  }
+
+  .opt-box {
+    width: 16px; height: 16px;
+    min-width: 16px;
+    border: 1.5px solid #c0bab2;
+    margin-top: 2px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  /* Radio style — circle */
+  .opt.radio .opt-box { border-radius: 50%; }
+
+  .opt input:checked ~ .opt-box {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .opt input:checked ~ .opt-box::after {
+    content: '';
+    display: block;
+    width: 6px; height: 6px;
+    background: #fff;
+    border-radius: 1px;
+  }
+  .opt.radio input:checked ~ .opt-box::after {
+    border-radius: 50%;
+  }
+
+  .opt input:checked ~ .opt-text { color: var(--ink); font-weight: 500; }
+  .opt-text { font-size: 14px; color: var(--mid); line-height: 1.5; }
+
+  /* FOLLOWUP */
+  .followup {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--rule);
+  }
+  .followup-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 10px;
+  }
+  .followup-line {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid var(--rule);
+    background: transparent;
+    padding: 8px 0;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .followup-line:focus { border-color: var(--accent); }
+  .followup-line::placeholder { color: #c0bab2; }
+
+  .followup-area {
+    width: 100%;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    padding: 12px 14px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.2s;
+    margin-top: 4px;
+  }
+  .followup-area:focus { border-color: var(--accent); }
+
+  /* EXAMPLE CALLOUT */
+  .example-callout {
+    margin: 0 0 20px;
+    padding: 14px 16px;
+    background: #f5f2ec;
+    border-left: 3px solid var(--accent-warm);
+    font-size: 13px;
+    color: var(--mid);
+    font-style: italic;
+    line-height: 1.65;
+  }
+
+  /* SUBMIT BUTTON */
+  .submit-area {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .submit-btn {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 18px 56px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .submit-btn:hover { background: #2a2a4e; }
+  .submit-btn:active { transform: scale(0.98); }
+
+  .submit-note {
+    font-size: 12px;
+    color: var(--light);
+    margin-top: 14px;
+  }
+
+  /* SUCCESS STATE */
+  .success-screen {
+    display: none;
+    background: var(--accent);
+    padding: 80px 48px;
+    text-align: center;
+    margin-top: 24px;
+  }
+  .success-screen h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .success-screen p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .success-accent {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  /* FOOTER */
+  .footer-block {
+    background: var(--accent);
+    margin-top: 48px;
+    padding: 40px 48px;
+  }
+  .footer-block p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+  }
+  .footer-block p strong { color: #fff; font-weight: 500; }
+  .footer-cta {
+    font-size: 13px;
+    color: var(--accent-warm);
+    margin-top: 14px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 48px 24px 40px; }
+    .wrapper { padding: 0 16px 60px; }
+    .intro-block { padding: 32px 24px; }
+    .intro-block::before { left: 24px; }
+    .respondent-block { padding: 24px; }
+    .respondent-fields { grid-template-columns: 1fr; }
+    .q-card { padding: 28px 24px; }
+    .q-number { top: 24px; right: 24px; font-size: 36px; }
+    .footer-block { padding: 32px 24px; }
+    .success-screen { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-label">Market Research Survey</div>
+  <h1>Social Translator<br><em>B2B Validation</em></h1>
+  <div class="header-meta">
+    <span>Therapists &amp; Coaches</span>
+    <div class="dot"></div>
+    <span>Behavioral Specialists</span>
+    <div class="dot"></div>
+    <span>8–10 minutes</span>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <!-- INTRO -->
+  <div class="intro-block">
+    <p>
+      I'm building an AI tool for neurodivergent professionals (autism, ADHD, social anxiety, etc.) that catches the unspoken cues during conversations that they might miss — body language, tone, what's <em>not</em> being said, contradictions between words and reality.
+    </p>
+    <p style="margin-top:16px;">
+      In business, this means catching when someone's actually frustrated (even if they say "no problem"), or when a prospect isn't really interested (even if they say "sounds good"), or when a colleague needs support (even if they claim they're fine).
+    </p>
+    <p style="margin-top:16px;">
+      I'm doing market research with therapists, coaches, and behavioral specialists to understand if this solves a real problem and how it should work. Your honest feedback is invaluable.
+    </p>
+    <div class="sign">
+      Thanks,<br>
+      <strong>Seth</strong>
+    </div>
+  </div>
+
+  <!-- FORM STARTS HERE -->
+  <form id="survey-form" action="https://formspree.io/f/mwvryjjk" method="POST">
+
+    <!-- RESPONDENT INFO -->
+    <div class="respondent-block">
+      <div class="r-label">Your Information</div>
+      <div class="respondent-fields">
+        <div class="r-field">
+          <label for="resp-name">Full Name</label>
+          <input type="text" id="resp-name" name="respondent_name" placeholder="Jane Smith" required>
+        </div>
+        <div class="r-field">
+          <label for="resp-email">Email Address</label>
+          <input type="email" id="resp-email" name="respondent_email" placeholder="jane@practice.com" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div class="section-divider"><span>Survey Questions</span></div>
+
+    <!-- Q1 -->
+    <div class="q-card">
+      <div class="q-number">01</div>
+      <div class="q-label">Client Challenges</div>
+      <div class="q-text">Do your neurodivergent clients or students miss unspoken cues during conversations — things like body language, tone shifts, what's NOT being said, or contradictions between what someone says and how they actually seem?</div>
+      <div class="example-callout">
+        Examples: Missing that a prospect isn't really interested even though they said "sounds good." Not realizing a colleague is frustrated when they say "no problem." Missing that someone needs support when they claim they're "fine."
+      </div>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q1" value="Yes — major pain point for many clients"><div class="opt-box"></div><span class="opt-text">Yes — this is a major pain point for many of my clients</span></label>
+        <label class="opt radio"><input type="radio" name="q1" value="Yes — some clients struggle regularly"><div class="opt-box"></div><span class="opt-text">Yes — some of my clients struggle with this regularly</span></label>
+        <label class="opt radio"><input type="radio" name="q1" value="Occasionally, not a primary issue"><div class="opt-box"></div><span class="opt-text">Occasionally, but not a primary issue</span></label>
+        <label class="opt radio"><input type="radio" name="q1" value="Rarely"><div class="opt-box"></div><span class="opt-text">Rarely</span></label>
+        <label class="opt radio"><input type="radio" name="q1" value="Not sure / doesn't apply"><div class="opt-box"></div><span class="opt-text">Not sure / doesn't apply to my work</span></label>
+      </div>
+      <div class="followup">
+        <div class="followup-label">Follow-up: Describe a situation where this cost your client something</div>
+        <input class="followup-line" type="text" name="q1_followup" placeholder="Optional — a sale, a relationship, a misunderstanding...">
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card">
+      <div class="q-number">02</div>
+      <div class="q-label">Real-World Consequences</div>
+      <div class="q-text">What's the biggest consequence when your clients miss these unspoken cues in professional or personal conversations?</div>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q2" value="Misunderstood what the other person wanted or needed"><div class="opt-box"></div><span class="opt-text">Misunderstood what the other person actually wanted or needed</span></label>
+        <label class="opt radio"><input type="radio" name="q2" value="Missed a business opportunity"><div class="opt-box"></div><span class="opt-text">Missed a business opportunity (sale, partnership, connection)</span></label>
+        <label class="opt radio"><input type="radio" name="q2" value="Created conflict or hurt a relationship without realizing it"><div class="opt-box"></div><span class="opt-text">Created conflict or hurt a relationship without realizing it</span></label>
+        <label class="opt radio"><input type="radio" name="q2" value="Made wrong assumptions about emotional state"><div class="opt-box"></div><span class="opt-text">Made wrong assumptions about someone's emotional state</span></label>
+        <label class="opt radio"><input type="radio" name="q2" value="Didn't follow up when they should have"><div class="opt-box"></div><span class="opt-text">Didn't follow up when they should have (missed the signal to check in)</span></label>
+        <label class="opt radio"><input type="radio" name="q2" value="Something else"><div class="opt-box"></div><span class="opt-text">Something else</span></label>
+      </div>
+      <div class="followup">
+        <div class="followup-label">If "something else," describe:</div>
+        <input class="followup-line" type="text" name="q2_followup" placeholder="">
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card">
+      <div class="q-number">03</div>
+      <div class="q-label">Product Fit</div>
+      <div class="q-text">If a tool caught these unspoken cues in real-time during video calls and alerted your clients to what they might be missing — would you use it with your clients?</div>
+      <div class="example-callout">
+        Example: During a call, the AI flags — "They said 'sounds good' but their tone sounds hesitant and they're looking away. You might clarify: 'What specific concerns do you have?'"
+      </div>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q3" value="Definitely yes"><div class="opt-box"></div><span class="opt-text">Definitely yes</span></label>
+        <label class="opt radio"><input type="radio" name="q3" value="Probably yes"><div class="opt-box"></div><span class="opt-text">Probably yes</span></label>
+        <label class="opt radio"><input type="radio" name="q3" value="Maybe"><div class="opt-box"></div><span class="opt-text">Maybe</span></label>
+        <label class="opt radio"><input type="radio" name="q3" value="Probably not"><div class="opt-box"></div><span class="opt-text">Probably not</span></label>
+        <label class="opt radio"><input type="radio" name="q3" value="Definitely not"><div class="opt-box"></div><span class="opt-text">Definitely not</span></label>
+      </div>
+      <div class="followup">
+        <div class="followup-label">What would make it more useful for your situation?</div>
+        <input class="followup-line" type="text" name="q3_followup" placeholder="">
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card">
+      <div class="q-number">04</div>
+      <div class="q-label">AI Coaching</div>
+      <div class="q-text">Would you feel comfortable having the AI suggest specific ways for your clients to respond or clarify based on the unspoken cues it detects?</div>
+      <div class="example-callout">
+        Example: The AI detects someone sounds frustrated but said "everything's fine." It suggests — "You might say: 'I want to make sure I understand — is there something I'm missing?' or 'I noticed you sound a bit stressed. What's going on?'"
+      </div>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q4" value="Yes, I'd trust this kind of response coaching"><div class="opt-box"></div><span class="opt-text">Yes, I'd trust this kind of response coaching</span></label>
+        <label class="opt radio"><input type="radio" name="q4" value="Maybe, but only with my guidance and review first"><div class="opt-box"></div><span class="opt-text">Maybe, but only with my guidance and review first</span></label>
+        <label class="opt radio"><input type="radio" name="q4" value="Probably not — I prefer to coach the response myself"><div class="opt-box"></div><span class="opt-text">Probably not — I prefer to coach the response myself</span></label>
+        <label class="opt radio"><input type="radio" name="q4" value="No, that feels too prescriptive"><div class="opt-box"></div><span class="opt-text">No, that feels too prescriptive</span></label>
+        <label class="opt radio"><input type="radio" name="q4" value="Not sure"><div class="opt-box"></div><span class="opt-text">Not sure</span></label>
+      </div>
+      <div class="followup">
+        <div class="followup-label">What level of AI coaching would feel right for your clients?</div>
+        <input class="followup-line" type="text" name="q4_followup" placeholder="">
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card">
+      <div class="q-number">05</div>
+      <div class="q-label">Integration Model</div>
+      <div class="q-text">How would you prefer to integrate this into your practice?</div>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q5" value="Clients use independently between sessions"><div class="opt-box"></div><span class="opt-text">Clients use independently — practice on their own between sessions</span></label>
+        <label class="opt radio"><input type="radio" name="q5" value="I use it during sessions with clients"><div class="opt-box"></div><span class="opt-text">I use it during sessions — real-time tool during our work together</span></label>
+        <label class="opt radio"><input type="radio" name="q5" value="Homework — clients use between sessions and report back"><div class="opt-box"></div><span class="opt-text">Homework — clients use between sessions and report back</span></label>
+        <label class="opt radio"><input type="radio" name="q5" value="Multiple ways depending on the client"><div class="opt-box"></div><span class="opt-text">Multiple ways depending on the client</span></label>
+        <label class="opt radio"><input type="radio" name="q5" value="Not sure yet"><div class="opt-box"></div><span class="opt-text">Not sure yet</span></label>
+      </div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card">
+      <div class="q-number">06</div>
+      <div class="q-label">Feature Priority</div>
+      <div class="q-text">What matters most for helping your clients catch these unspoken cues?</div>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q6" value="Real-time alerts during the call"><div class="opt-box"></div><span class="opt-text">Real-time alerts during the call ("heads up: they sound hesitant even though they said yes")</span></label>
+        <label class="opt radio"><input type="radio" name="q6" value="In-moment coaching on how to respond"><div class="opt-box"></div><span class="opt-text">Coaching on how to respond in the moment ("you might clarify by asking...")</span></label>
+        <label class="opt radio"><input type="radio" name="q6" value="Post-call summary to review and learn from"><div class="opt-box"></div><span class="opt-text">Post-call summary to review and learn from</span></label>
+        <label class="opt radio"><input type="radio" name="q6" value="Progress tracking over time"><div class="opt-box"></div><span class="opt-text">Progress tracking over time (showing they're getting better at catching signals)</span></label>
+        <label class="opt radio"><input type="radio" name="q6" value="Simplicity and ease of use"><div class="opt-box"></div><span class="opt-text">Simplicity and ease of use — just works, no friction</span></label>
+        <label class="opt radio"><input type="radio" name="q6" value="Something else"><div class="opt-box"></div><span class="opt-text">Something else</span></label>
+      </div>
+      <div class="followup">
+        <div class="followup-label">If "something else," describe:</div>
+        <input class="followup-line" type="text" name="q6_followup" placeholder="">
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card">
+      <div class="q-number">07</div>
+      <div class="q-label">Privacy &amp; Ethics</div>
+      <div class="q-text">Any privacy or ethical concerns about using an AI tool that analyzes video and audio during your clients' conversations?</div>
+      <p style="font-size:12px; color:var(--light); margin-bottom:18px;">Note: All analysis happens locally on their device — no videos are stored or sent to servers. We're asking about comfort level with the concept.</p>
+      <div class="followup" style="border-top:none; padding-top:0; margin-top:0;">
+        <textarea class="followup-area" name="q7_privacy" placeholder="Data storage, face recognition, client comfort, transparency, consent — share any concerns freely..."></textarea>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card">
+      <div class="q-number">08</div>
+      <div class="q-label">Pricing Model</div>
+      <div class="q-text">Which pricing model would feel fairest and most accessible?</div>
+      <p style="font-size:12px; color:var(--light); margin-bottom:18px;">This is market research only — no commitment to any model yet.</p>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q8" value="Per-client monthly subscription ($10–30/client/month)"><div class="opt-box"></div><span class="opt-text">Per-client monthly subscription ($10–30/client/month)</span></label>
+        <label class="opt radio"><input type="radio" name="q8" value="Flat monthly fee ($500–2,000/month unlimited client access)"><div class="opt-box"></div><span class="opt-text">Flat monthly fee for you ($500–2,000/month for unlimited client access)</span></label>
+        <label class="opt radio"><input type="radio" name="q8" value="Revenue share"><div class="opt-box"></div><span class="opt-text">Revenue share (you get a portion of what referred clients pay)</span></label>
+        <label class="opt radio"><input type="radio" name="q8" value="Tiered pricing (individual vs. group use)"><div class="opt-box"></div><span class="opt-text">Tiered pricing (individual vs. group use)</span></label>
+        <label class="opt radio"><input type="radio" name="q8" value="Not sure"><div class="opt-box"></div><span class="opt-text">Not sure</span></label>
+      </div>
+      <div class="followup">
+        <div class="followup-label">What price point actually makes sense for your situation?</div>
+        <input class="followup-line" type="text" name="q8_followup" placeholder="">
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card">
+      <div class="q-number">09</div>
+      <div class="q-label">Pilot Interest</div>
+      <div class="q-text">Would you be interested in being a pilot partner when we launch an MVP for neurodivergent professionals?</div>
+      <p style="font-size:12px; color:var(--light); margin-bottom:18px;">Pilots get early access, provide direct feedback, and help shape the product. We'd offer discounted rates in exchange for honest feedback and a few check-ins.</p>
+      <div class="options">
+        <label class="opt radio"><input type="radio" name="q9" value="Definitely interested"><div class="opt-box"></div><span class="opt-text">Definitely interested</span></label>
+        <label class="opt radio"><input type="radio" name="q9" value="Maybe — tell me more"><div class="opt-box"></div><span class="opt-text">Maybe — tell me more</span></label>
+        <label class="opt radio"><input type="radio" name="q9" value="Probably not"><div class="opt-box"></div><span class="opt-text">Probably not</span></label>
+        <label class="opt radio"><input type="radio" name="q9" value="Not sure yet"><div class="opt-box"></div><span class="opt-text">Not sure yet</span></label>
+      </div>
+      <div class="followup">
+        <div class="followup-label">If yes or maybe — best way to reach you:</div>
+        <input class="followup-line" type="text" name="q9_contact" placeholder="Email, phone, LinkedIn, etc." style="margin-bottom:16px;">
+        <div class="followup-label" style="margin-top:16px;">Best timing for a pilot:</div>
+        <input class="followup-line" type="text" name="q9_timing" placeholder="e.g., Q3 2025, after summer, flexible...">
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card">
+      <div class="q-number">10</div>
+      <div class="q-label">Open Feedback</div>
+      <div class="q-text">Any other thoughts, concerns, or suggestions?</div>
+      <div class="followup" style="border-top:none; padding-top:0; margin-top:0;">
+        <textarea class="followup-area" name="q10_open" placeholder="Nothing is off-limits — your candid perspective is the whole point." style="min-height:100px;"></textarea>
+      </div>
+    </div>
+
+    <!-- SUBMIT -->
+    <div class="submit-area">
+      <button type="submit" class="submit-btn">Submit My Responses</button>
+      <p class="submit-note">Your answers go directly and securely to Seth. No spam, no sharing.</p>
+    </div>
+
+  </form>
+
+  <!-- SUCCESS MESSAGE (shown after JS redirect) -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-accent">Received</div>
+    <h2>Thank you.</h2>
+    <p>Your feedback goes directly toward shaping this product. If you said you're open to a pilot or want to stay posted, expect to hear from Seth directly.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-block">
+    <p>That's it. <strong>Thanks for your time and honest feedback.</strong></p>
+    <p style="margin-top:10px;">Your insights on whether this solves a real problem for neurodivergent professionals will directly shape how we build this.</p>
+    <p style="margin-top:10px;">If you're interested in following along as we develop this, reply with <strong>"keep me posted"</strong> and I'll add you to our update list.</p>
+    <div class="footer-cta">Best, Seth</div>
+  </div>
+
+</div>
+
+<script>
+  // Intercept form submit for smooth UX — no page reload flash
+  const form = document.getElementById('survey-form');
+  const success = document.getElementById('success-screen');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = form.querySelector('.submit-btn');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (res.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        btn.textContent = 'Something went wrong — try again';
+        btn.disabled = false;
+      }
+    } catch(err) {
+      btn.textContent = 'Network error — try again';
+      btn.disabled = false;
+    }
+  });
+
+  // Visual checkbox/radio feedback
+  document.querySelectorAll('.opt').forEach(opt => {
+    const input = opt.querySelector('input');
+    if (!input) return;
+    input.addEventListener('change', () => {
+      if (input.type === 'radio') {
+        const siblings = document.querySelectorAll(`input[name="${input.name}"]`);
+        siblings.forEach(s => s.closest('.opt').style.background = '');
+      }
+      if (input.checked) {
+        opt.style.background = '#eef0f5';
+        opt.style.borderColor = '#9a9fc0';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
